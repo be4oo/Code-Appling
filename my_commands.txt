@@ -1,0 +1,33 @@
+
+   30  git config --global user.name be4o
+   31  git config --global user.email besho.ageeb88@gmail.com
+   32  git init
+   33  git add .
+   34  git commit -m "Initial commit"
+   35  git push
+   36  git push
+   37  git config --global user.name be4o
+   38  git config --global user.email besho.ageeb88@gmail.com
+   39  git push
+   40  git add .
+   41  git push
+   42  git init
+   43  git add .
+   44  git commit -m "Projects: Investigating Netflix Movies & Word Frequency in Moby Dick & Exploratory Data Analysis (EDA) on a supermarket sales dataset"
+   45  git remote add origin https://github.com/be4oo/IBM_Data_Science_Code_Appling.git
+   46  git push -u origin main
+   47  git branch
+   48  git push -u origin master
+   49  git init
+   50  git add Projects
+   51  git commit -m "Projects: Investigating Netflix Movies & Word Frequency in Moby Dick & Exploratory Data Analysis (EDA) on a supermarket sales dataset"
+   52  git remote add origin https://github.com/be4oo/IBM_Data_Science_Code_Appling.git
+   53  git push -u origin main
+   54  git pull
+   55  git push -u origin main -force
+   56  git push -u origin main --force
+   57  git branck
+   58  git branch
+   59  git chechout main
+   60  git checkout main
+   61  history > my_commands.txt
