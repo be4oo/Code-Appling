@@ -28,10 +28,10 @@ data = load_data()
 st.sidebar.subheader("Show random tweet")
 random_tweet = st.sidebar.radio('Sentiment', ('positive', 'neutral', 'negative'))
 # This line of code performs several operations in sequence to display a random tweet from a DataFrame in a Streamlit sidebar using Markdown formatting.
-# 1. data.query("airline_sentiment == @random_tweet"): Filters the 'data' DataFrame for rows where the 'airline_sentiment' column matches the value of 'random_tweet'.
-# 2. [["text"]]: Selects the 'text' column from the filtered DataFrame, resulting in a DataFrame with just the tweet texts.
-# 3. .sample(n=1): Randomly selects 1 row from the DataFrame containing only the tweet texts. This is used to get a random tweet.
-# 4. .iat[0, 0]: Accesses the first element of the sampled DataFrame, which is the text of the randomly selected tweet.
+# data.query("airline_sentiment == @random_tweet"): Filters the 'data' DataFrame for rows where the 'airline_sentiment' column matches the value of 'random_tweet'.
+# [["text"]]: Selects the 'text' column from the filtered DataFrame, resulting in a DataFrame with just the tweet texts.
+# .sample(n=1): Randomly selects 1 row from the DataFrame containing only the tweet texts. This is used to get a random tweet.
+# .iat[0, 0]: Accesses the first element of the sampled DataFrame, which is the text of the randomly selected tweet.
 st.sidebar.markdown(data.query("airline_sentiment == @random_tweet")[["text"]].sample(n=1).iat[0, 0])
 
 st.sidebar.markdown("### Number of tweets by sentiment")
@@ -72,50 +72,20 @@ if not st.sidebar.checkbox("Close", True, key='2a'):
         fig_2 = px.pie(airline_sentiment_count, values='Tweets', names='Airline')
         st.plotly_chart(fig_2)
 
-
-@st.cache_data(persist=True)
-def plot_sentiment(airline):
-    df = data[data['airline']==airline]
-    count = df['airline_sentiment'].value_counts()
-    count = pd.DataFrame({'Sentiment':count.index, 'Tweets':count.values.flatten()})
-    return count
-
-
-st.sidebar.subheader("Breakdown airline by sentiment")
-choice = st.sidebar.multiselect('Pick airlines', ('US Airways','United','American','Southwest','Delta','Virgin America'))
-if len(choice) > 0:
-    st.subheader("Breakdown airline by sentiment")
-    breakdown_type = st.sidebar.selectbox('Visualization type', ['Pie chart', 'Bar plot', ], key='3')
-    fig_3 = make_subplots(rows=1, cols=len(choice), subplot_titles=choice)
-    if breakdown_type == 'Bar plot':
-        for i in range(1):
-            for j in range(len(choice)):
-                fig_3.add_trace(
-                    go.Bar(x=plot_sentiment(choice[j]).Sentiment, y=plot_sentiment(choice[j]).Tweets, showlegend=False),
-                    row=i+1, col=j+1
-                )
-        fig_3.update_layout(height=600, width=800)
-        st.plotly_chart(fig_3)
-    else:
-        fig_3 = make_subplots(rows=1, cols=len(choice), specs=[[{'type':'domain'}]*len(choice)], subplot_titles=choice)
-        for i in range(1):
-            for j in range(len(choice)):
-                fig_3.add_trace(
-                    go.Pie(labels=plot_sentiment(choice[j]).Sentiment, values=plot_sentiment(choice[j]).Tweets, showlegend=True),
-                    i+1, j+1
-                )
-        fig_3.update_layout(height=600, width=800)
-        st.plotly_chart(fig_3)
-st.sidebar.subheader("Breakdown airline by sentiment")
-choice = st.sidebar.multiselect('Pick airlines', ('US Airways','United','American','Southwest','Delta','Virgin America'), key=0)
+st.sidebar.subheader("Breakdown airline tweets by sentiment")
+choice = st.sidebar.multiselect('Pick airlines', ('United', 'Southwest', 'American', 'US Airways', 'Delta', 'Virgin America'), key='0')
 if len(choice) > 0:
     choice_data = data[data.airline.isin(choice)]
-    fig_0 = px.histogram(
-                        choice_data, x='airline', y='airline_sentiment',
-                         histfunc='count', color='airline_sentiment',
-                         facet_col='airline_sentiment', labels={'airline_sentiment':'tweets'},
-                          height=600, width=800)
-    st.plotly_chart(fig_0)
+    # This line of code creates a histogram using Plotly Express, assigning it to the variable 'fig_choice'.
+    # px.histogram: Calls the histogram function from Plotly Express (px) to create a histogram.
+    # choice_data: The DataFrame containing the data to be plotted.
+    # histfunc='count': Specifies the histogram function to count occurrences, effectively counting the number of tweets per airline per sentiment.
+    # facet_col='airline_sentiment': Creates separate subplots (facets) for each unique value in the 'airline_sentiment' column, allowing for comparison across sentiments.
+    # labels={'airline_sentiment':'tweets'}: Renames the 'airline_sentiment' axis label to 'tweets' for clarity in the plot.
+    fig_choice = px.histogram(choice_data, x='airline', y= 'airline_sentiment', histfunc= 'count', color='airline_sentiment',
+                              facet_col='airline_sentiment', labels={'airline_sentiment':'tweets'}, height=600, width=800)
+    st.plotly_chart(fig_choice)
+
 
 st.sidebar.header("Word Cloud")
 word_sentiment = st.sidebar.radio('Display word cloud for what sentiment?', ('positive', 'neutral', 'negative'))
@@ -123,8 +93,21 @@ word_sentiment = st.sidebar.radio('Display word cloud for what sentiment?', ('po
 if not st.sidebar.checkbox("Close", True, key='3a'):
     st.subheader(f'Word cloud for {word_sentiment} sentiment')
     df = data[data['airline_sentiment'] == word_sentiment]
+    # This line of code concatenates all the strings found in the 'text' column of
+    # the DataFrame 'df' into a single string, with each word separated by a space.
+    # ' '.join(...): Joins elements of the list with a space character as the separator, resulting in a single string.
     words = ' '.join(df['text'])
+    # This line of code filters and joins words from a string into a new string, excluding specific patterns.
+    # [word for word in words.split() ...]: List comprehension that iterates over each word in the 'words' string, which is split into a list of words based on spaces.
+    # if 'http' not in word ...: Filters out any word containing 'http', typically used to remove URLs.
+    # and not word.startswith('@') ...: Further filters out any word that starts with '@', commonly used to remove mentions in social media texts.
+    # and word != 'RT': Additionally, filters out the exact word 'RT', which is often used in social media to indicate a retweet.
+    # The overall effect is to create a string of 'processed_words' that excludes URLs, mentions, and retweet indicators from the original 'words' string.
     processed_words = ' '.join([word for word in words.split() if 'http' not in word and not word.startswith('@') and word != 'RT'])
+    # This line of code generates a word cloud image from a string of 'processed_words'.
+    # WordCloud(...): Instantiates a WordCloud object from the WordCloud class.
+    # stopwords=STOPWORDS: Specifies a collection of words to be ignored when generating the word cloud. 
+    # These are typically common words that do not contribute to the meaning of the text.
     wordcloud = WordCloud(stopwords=STOPWORDS, background_color='white', width=800, height=640).generate(processed_words)
     
     fig, ax = plt.subplots()
