@@ -1,0 +1,11 @@
+>> Today
+        # Dash >> Dashboard from Plotly-Dash
+        # Streamlit >> Dashboard but easier in syntax and deployment
+
+>> Next Day
+End to End EDA Project
+
+>> Projects:
+* Flight Delays
+* WildFire
+* XYZ Automotives

@@ -1,0 +1,21 @@
+https://www.geeksforgeeks.org/steps-for-mastering-exploratory-data-analysis-eda-steps/
+
+
+
+https://www.analyticsvidhya.com/blog/2022/07/step-by-step-exploratory-data-analysis-eda-using-python/
+
+
+https://www.analyticsvidhya.com/blog/2021/08/how-to-perform-exploratory-data-analysis-a-guide-for-beginners/
+
+
+Python Cheat Sheet for Data Analysis
+https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DA0101EN-Coursera/labs/Python%20Cheat%20Sheet%20for%20Data%20Analysis.pdf
+
+
+Cheat Sheet: Model Development
+https://author-ide.skills.network/render?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZF9pbnN0cnVjdGlvbnNfdXJsIjoiaHR0cHM6Ly9jZi1jb3Vyc2VzLWRhdGEuczMudXMuY2xvdWQtb2JqZWN0LXN0b3JhZ2UuYXBwZG9tYWluLmNsb3VkL0lCTURldmVsb3BlclNraWxsc05ldHdvcmstREEwMTAxRU4tQ291cnNlcmEvbGFicy8yMDA1NDIuMDY3X000X0NoZWF0X1NoZWV0Lm1kIiwidG9vbF90eXBlIjoiaW5zdHJ1Y3Rpb25hbC1sYWIiLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTcxMTYzODYxMH0.VdvvKY4TnHIrBHlQE72US5J0n97egjMecmNWZaHM0Jk
+
+
+Chi-Square Test for Categorical Variables(Optional)
+https://author-ide.skills.network/render?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZF9pbnN0cnVjdGlvbnNfdXJsIjoiaHR0cHM6Ly9jZi1jb3Vyc2VzLWRhdGEuczMudXMuY2xvdWQtb2JqZWN0LXN0b3JhZ2UuYXBwZG9tYWluLmNsb3VkL09FalYxZlpCcTV0U2tRbi1DbzktNWcvY2hpLXNxYXVyZS10ZXN0LXYxLm1kIiwidG9vbF90eXBlIjoiaW5zdHJ1Y3Rpb25hbC1sYWIiLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTcyMDQyNDEyN30.JDCFbr5JLurtHp32A_JgPr0a8kgJIjD1mBxa2rcSHSM
+
